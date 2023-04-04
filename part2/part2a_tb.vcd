@@ -1,0 +1,73 @@
+$date
+	Tue Apr  4 17:13:58 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module part2a_tb $end
+$var wire 16 ! data_out [15:0] $end
+$var reg 2 " FunSel [1:0] $end
+$var reg 8 # I [7:0] $end
+$var reg 1 $ LH $end
+$var reg 1 % enable $end
+$scope module part2a_inst $end
+$var wire 2 & FunSel [1:0] $end
+$var wire 8 ' I [7:0] $end
+$var wire 1 $ LH $end
+$var wire 1 % enable $end
+$var reg 16 ( data_out [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx (
+b0 '
+b0 &
+0%
+0$
+b0 #
+b0 "
+bx !
+$end
+#10
+1$
+b10101010 #
+b10101010 '
+b1 "
+b1 &
+#20
+b10101010xxxxxxxx !
+b10101010xxxxxxxx (
+1%
+#30
+0%
+#40
+b1010101000000101 !
+b1010101000000101 (
+0$
+b101 #
+b101 '
+1%
+#50
+b1010101000000100 !
+b1010101000000100 (
+b10 "
+b10 &
+#60
+b1010101000000101 !
+b1010101000000101 (
+b111 #
+b111 '
+b11 "
+b11 &
+#70
+b0 #
+b0 '
+b0 "
+b0 &
+0%
+#80
