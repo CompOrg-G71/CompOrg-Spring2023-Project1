@@ -1,0 +1,108 @@
+$date
+	Wed Apr  5 16:36:57 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module part2b_tb $end
+$var wire 8 ! O2 [7:0] $end
+$var wire 8 " O1 [7:0] $end
+$var reg 2 # FunSel [1:0] $end
+$var reg 8 $ I [7:0] $end
+$var reg 3 % O1Sel [2:0] $end
+$var reg 3 & O2Sel [2:0] $end
+$var reg 4 ' RSel [3:0] $end
+$var reg 4 ( TSel [3:0] $end
+$scope module uut $end
+$var wire 2 ) FunSel [1:0] $end
+$var wire 8 * I [7:0] $end
+$var wire 3 + O1Sel [2:0] $end
+$var wire 3 , O2Sel [2:0] $end
+$var wire 4 - RSel [3:0] $end
+$var wire 4 . TSel [3:0] $end
+$var reg 8 / O1 [7:0] $end
+$var reg 8 0 O2 [7:0] $end
+$var reg 8 1 R1 [7:0] $end
+$var reg 8 2 R2 [7:0] $end
+$var reg 8 3 R3 [7:0] $end
+$var reg 8 4 R4 [7:0] $end
+$var reg 8 5 T1 [7:0] $end
+$var reg 8 6 T2 [7:0] $end
+$var reg 8 7 T3 [7:0] $end
+$var reg 8 8 T4 [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 8
+bx 7
+bx 6
+bx 5
+bx 4
+bx 3
+b0 2
+bx 1
+bx 0
+bx /
+b1 .
+b100 -
+b0 ,
+b0 +
+b0 *
+b0 )
+b1 (
+b100 '
+b0 &
+b0 %
+b0 $
+b0 #
+bx "
+bx !
+$end
+#10
+b11000 !
+b11000 0
+b11000 "
+b11000 /
+b11000 8
+b11000 2
+b1 #
+b1 )
+b11 &
+b11 ,
+b101 %
+b101 +
+b11000 $
+b11000 *
+#20
+b10111 !
+b10111 0
+b10111 "
+b10111 /
+b10111 8
+b10111 2
+b10 #
+b10 )
+#30
+b11000 !
+b11000 0
+b11000 "
+b11000 /
+b11000 8
+b11000 2
+b11 #
+b11 )
+#40
+b0 !
+b0 0
+b0 "
+b0 /
+b0 8
+b0 2
+b0 #
+b0 )
+#50

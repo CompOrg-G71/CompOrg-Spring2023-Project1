@@ -36,6 +36,18 @@ initial begin
     #10;
 
     enable = 1;
+    FunSel = 2'b00;
+    I = 8'b00000101;
+    LH = 0;
+    #10;
+
+    enable = 1;
+    FunSel = 2'b01;
+    I = 8'b00000101;
+    LH = 1;
+    #10;
+
+    enable = 1;
     FunSel = 2'b01;
     I = 8'b00000101;
     LH = 0;
@@ -53,7 +65,6 @@ initial begin
     LH = 0;
     #10;
 
-    enable = 0;
     FunSel = 2'b0;
     I = 8'b0;
     LH = 0;
