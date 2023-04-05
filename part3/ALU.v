@@ -68,7 +68,7 @@ module ALU (
                 temp_result = A + B_neg; // Perform subtraction using 2's complement addition
                 OutALU <= temp_result[7:0];
                 Flags[0] <= (temp_result == 9'b0); // Z flag
-                Flags[1] <= (A[7] & ~B[7]) & ~temp_result[7]; // C flag
+                Flags[1] <= (~A[7] & B[7]) | (B[7] & temp_result[7]) | (temp_result[7] & ~A[7]); // C flag
                 Flags[2] <= temp_result[7]; // N flag
                 Flags[3] <= Flags[3] <= (A[7] & ~B[7] & ~temp_result[7]) | (~A[7] & B[7] & temp_result[7]); // O flag
             end
@@ -126,7 +126,7 @@ module ALU (
                 OutALU <= {A[6:0], 1'b0};
                 Flags[0] <= (OutALU == 8'b0); // Z flag
                 Flags[2] <= OutALU[7]; // N flag
-                Flags[3] <= (A[7] == 1'b1) ? 1'b1 : 1'b0; // O flag
+                Flags[3] <= (A[7] == 1'b1 && OutALU[7] == 1'b0) ? 1'b1 : 1'b0; // O flag
             end
             4'b1110: begin // ASR A
                 OutALU <= {A[7], A[7:1]};
