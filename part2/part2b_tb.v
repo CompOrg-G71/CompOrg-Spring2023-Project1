@@ -4,6 +4,7 @@
 
 module part2b_tb();
 
+reg clk;
 reg [7:0] I;
 reg [2:0] O1Sel;
 reg [2:0] O2Sel;
@@ -14,6 +15,7 @@ wire [7:0] O1, O2;
 
 
 part2b uut(
+    clk,
     I,
     O1Sel,
     O2Sel,
@@ -23,6 +25,10 @@ part2b uut(
     O1,
     O2
 );
+
+initial begin
+    clk = 0;
+    forever #5 clk = ~clk;
 
 initial begin
     

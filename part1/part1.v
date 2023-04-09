@@ -1,7 +1,7 @@
 
-module part1 (input [1:0] FunSel, input [3:0] data_in, input enable, output reg [3:0] data_out);
+module part1 (input clk, input [1:0] FunSel, input [3:0] data_in, input enable, output reg [3:0] data_out);
 
-    always @(FunSel or data_in or enable)
+    always @(posedge clk)
     begin
         if (enable == 0)
             data_out <= data_out;

@@ -4,13 +4,20 @@
 
 module part2a_tb();
 
+reg clk;
 reg [7:0] I;
 reg [1:0] FunSel;
 reg LH;
 reg enable;
 wire [15:0] data_out;
 
-part2a part2a_inst (I, FunSel, LH, enable, data_out);
+part2a part2a_inst (clk, I, FunSel, LH, enable, data_out);
+
+
+initial begin 
+    clk = 0;
+    forever #5 clk = ~clk;
+end
 
 initial begin
 
@@ -21,7 +28,7 @@ initial begin
     FunSel = 2'b0;
     I = 8'b0;
     LH = 0;
-    #10;
+    # ;
 
     enable = 0;
     FunSel = 2'b01;
