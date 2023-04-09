@@ -61,13 +61,13 @@ initial begin
     TSel = 4'b0001;
     #10;
 
-    I = 8'b00011000;
-    O1Sel = 3'b101;
+    I = 8'b01011110;
+    O1Sel = 3'b110;
     O2Sel = 3'b011;
-    FunSel = 2'b00;
-    RSel = 4'b0100;
-    TSel = 4'b0001;
-    #10;
+    FunSel = 2'b01;
+    RSel = 4'b0010;
+    TSel = 4'b0010;
+    #10;    
 
     $display("Simulation Completed..");
     $finish;

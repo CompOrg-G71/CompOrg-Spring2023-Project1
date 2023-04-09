@@ -1,4 +1,5 @@
 `timescale 1ns / 1ps
+`include "ALU.v"
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
@@ -42,6 +43,10 @@ module ALU_tb;
     always #5 clk_tb = ~clk_tb;
 
     initial begin
+
+        $dumpfile("ALU_tb.vcd");
+        $dumpvars(0, ALU_tb);
+
         A_tb = 8'b00000001;
         B_tb = 8'b00000000;
         FunSel_tb = 4'b0000;
@@ -137,6 +142,7 @@ module ALU_tb;
         $display("CSR operation flags: %b", Flags_tb);
 
         // Finish simulation
+        $finish;
         #10;
 end
 endmodule
