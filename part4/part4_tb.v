@@ -21,14 +21,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 module Project1Test();
     //Input Registers of ALUSystem
-    reg[1:0] RF_O1Sel; 
-    reg[1:0] RF_O2Sel; 
+    reg[2:0] RF_O1Sel; 
+    reg[2:0] RF_O2Sel; 
     reg[1:0] RF_FunSel;
     reg[3:0] RF_RSel;
     reg[3:0] RF_TSel;
     reg[3:0] ALU_FunSel;
-    reg[1:0] ARF_OutCSel; 
-    reg[1:0] ARF_OutDSel; 
+    reg[1:0] ARF_OutASel; 
+    reg[1:0] ARF_OutBSel; 
     reg[1:0] ARF_FunSel;
     reg[3:0] ARF_RSel;
     reg      IR_LH;
@@ -43,8 +43,8 @@ module Project1Test();
     
     //Test Bench Connection of ALU System
     ALUSystem _ALUSystem(
-    .RF_OutASel(RF_O1Sel), 
-    .RF_OutBSel(RF_O2Sel), 
+    .RF_O1Sel(RF_O1Sel), 
+    .RF_O2Sel(RF_O2Sel), 
     .RF_FunSel(RF_FunSel),
     .RF_RSel(RF_RSel),
     .RF_TSel(RF_TSel),
@@ -72,7 +72,7 @@ module Project1Test();
     //Clock Signal Generation
     always 
     begin
-        Clock = 1; #5; Clock = 0; #5; // 10ns period
+        #5 Clock = 1; #5 Clock = 0; // 10ns period
     end
     
     //Read Test Bench Values
@@ -106,13 +106,15 @@ module Project1Test();
             
             $display("");
             $display("Output Values:");
-            $display("Register File: AOut: %d, BOut: %d", _ALUSystem.AOut, _ALUSystem.BOut);            
-            $display("ALUOut: %d, ALUOutFlag: %d, ALUOutFlags: Z:%d, C:%d, N:%d, O:%d,", _ALUSystem.ALUOut, _ALUSystem.ALUOutFlag, _ALUSystem.ALUOutFlag[3],_ALUSystem.ALUOutFlag[2],_ALUSystem.ALUOutFlag[1],_ALUSystem.ALUOutFlag[0]);
-            $display("Address Register File: COut: %d, DOut (Address): %d", _ALUSystem.ARF_COut, _ALUSystem.Address);            
-            $display("Memory Out: %d", _ALUSystem.MemoryOut);            
-            $display("Instruction Register: IROut: %d", _ALUSystem.IROut);            
+            $display("Register File: AOut: %d, BOut: %d", _ALUSystem.RF_O1, _ALUSystem.RF_O2);            
+            $display("ALUOut: %d, ALUOutFlag: %d, ALUOutFlags: Z:%d, C:%d, N:%d, O:%d,", _ALUSystem.ALU_Out, _ALUSystem.ALU_FlagOut, _ALUSystem.ALU_FlagOut[3],_ALUSystem.ALU_FlagOut[2],_ALUSystem.ALU_FlagOut[1],_ALUSystem.ALU_FlagOut[0]);
+            $display("Address Register File: OutA: %d, OutB (Address): %d", _ALUSystem.ARF_OutA, _ALUSystem.ARF_OutB);            
+            $display("Memory Out: %d", _ALUSystem.MemOut);            
+            $display("Instruction Register: IROut: %d", _ALUSystem.IR_Out);
             $display("MuxAOut: %d, MuxBOut: %d, MuxCOut: %d", _ALUSystem.MuxAOut, _ALUSystem.MuxBOut, _ALUSystem.MuxCOut);
             
+            $display("\n--------------------------\n");
+
             // increment array index and read next testvector
             VectorNum = VectorNum + 1;
             if (TestVectors[VectorNum] === 40'bx)

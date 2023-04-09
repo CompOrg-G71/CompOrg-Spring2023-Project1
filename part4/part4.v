@@ -136,7 +136,7 @@ module part2c_ARF(
     input [1:0] OutASel,
     input [1:0] OutBSel,
     input [1:0] FunSel,
-    input [2:0] RSel,
+    input [3:0] RSel,
     output reg [7:0] OutA,
     output reg [7:0] OutB
 );
@@ -155,38 +155,46 @@ always @ (posedge clk) begin
         2'b00:
         begin
             if(RSel[0] == 1) 
-                PC <= 8'b00000000;
+                PCPast <= 8'b00000000;
             if(RSel[1] == 1) 
-                AR <= 8'b00000000;
-            if(RSel[2] == 1) 
                 SP <= 8'b00000000;
+            if(RSel[2] == 1) 
+                AR <= 8'b00000000;
+            if(RSel[3] == 1) 
+                PC <= 8'b00000000;
         end
         2'b01:
         begin
             if(RSel[0] == 1) 
-                PC <= I;
+                PCPast <= I;
             if(RSel[1] == 1) 
-                AR <= I;
-            if(RSel[2] == 1) 
                 SP <= I;
+            if(RSel[2] == 1) 
+                AR <= I;
+            if(RSel[3] == 1) 
+                PC <= I;
         end
         2'b10:
         begin
-            if(RSel[2] == 1) 
-                PC <= PC + 1;
-            if(RSel[1] == 1) 
-                AR <= AR + 1;
             if(RSel[0] == 1) 
+                PCPast <= PCPast + 1;
+            if(RSel[1] == 1) 
                 SP <= SP + 1;
+            if(RSel[2] == 1) 
+                AR <= AR + 1;
+            if(RSel[3] == 1) 
+                PC <= PC + 1;
         end
         2'b11:
         begin
-            if(RSel[2] == 1) 
-                PC <= PC - 1;
-            if(RSel[1] == 1) 
-                AR <= AR - 1;
             if(RSel[0] == 1) 
+                PCPast <= PCPast - 1;
+            if(RSel[1] == 1) 
                 SP <= SP - 1;
+            if(RSel[2] == 1) 
+                AR <= AR - 1;
+            if(RSel[3] == 1) 
+                PC <= PC - 1;
         end
     endcase
 
@@ -209,7 +217,7 @@ end
 
 endmodule
 
-module part3_ALU (input [7:0] A, input [7:0] B, input [3:0] FunSel, input clk, output reg [7:0] OutALU, output reg [3:0] Flags);
+module part3_ALU (input clk, input [7:0] A, input [7:0] B, input [3:0] FunSel, output reg [7:0] OutALU, output reg [3:0] Flags);
 
     reg [8:0] temp_result;
     reg [7:0] B_neg;
@@ -326,14 +334,14 @@ endmodule
 
 
 module Memory(
+    input wire clock,
     input wire[7:0] address,
     input wire[7:0] data,
     input wire wr, //Read = 0, Write = 1
     input wire cs, //Chip is enable when cs = 0
-    input wire clock,
     output reg[7:0] o // Output
 );
-    //Declaration o�f the RAM Area
+    //Declaration of the RAM Area
     reg[7:0] RAM_DATA[0:255];
     //Read Ram data from the file
     initial $readmemh("RAM.mem", RAM_DATA);
@@ -351,13 +359,14 @@ module Memory(
 endmodule
 
 module mux_2to1(
+    input clk,
     input sel,
     input [7:0] in0,
     input [7:0] in1,
     output reg [7:0] out
-)
+);
 
-    always @(*) begin
+    always @(posedge clk) begin
         case(sel)
             1'b0: out = in0;
             1'b1: out = in1;
@@ -367,15 +376,16 @@ module mux_2to1(
 endmodule
 
 module mux_4to1(
+    input clk,
     input [1:0] sel,
     input [7:0] in0,
     input [7:0] in1,
     input [7:0] in2,
     input [7:0] in3,
     output reg [7:0] out
-)
+);
 
-    always @(*) begin
+    always @(posedge clk) begin
         case(sel)
             2'b00: out = in0;
             2'b01: out = in1;
@@ -387,14 +397,14 @@ module mux_4to1(
 endmodule
 
 module ALUSystem(
-input[1:0] RF_O1Sel, 
-input[1:0] RF_O2Sel, 
+input[2:0] RF_O1Sel, 
+input[2:0] RF_O2Sel, 
 input[1:0] RF_FunSel,
 input[3:0] RF_RSel,
 input[3:0] RF_TSel,
 input[3:0] ALU_FunSel,
-input[1:0] ARF_OutCSel, 
-input[1:0] ARF_OutDSel, 
+input[1:0] ARF_OutASel, 
+input[1:0] ARF_OutBSel,
 input[1:0] ARF_FunSel,
 input[3:0] ARF_RSel,
 input      IR_LH,
@@ -409,23 +419,28 @@ input      Clock
 );
 
     wire [7:0] MemOut;
-    wire [7:0] RF_O1, [7:0] RF_O2;
-    wire [7:0] MuxAOut, [7:0] MuxBOut, [7:0] MuxCOut;
+    wire [7:0] RF_O1,RF_O2;
+    wire [7:0] MuxAOut, MuxBOut, MuxCOut;
     wire [3:0] ALU_FlagOut;
     wire [7:0] ALU_Out;
-    wire [7:0] ARF_OutA, [7:0] ARF_OutB;
+    wire [7:0] ARF_OutA, ARF_OutB;
     wire [15:0] IR_Out;
     
     Memory Mem(Clock, ARF_OutB, ALU_Out, Mem_WR, Mem_CS, MemOut);
 
-    mux_4to1 MuxA(MuxASel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxAOut);
+    mux_4to1 MuxA(Clock, MuxASel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxAOut);
 
     part2b_RF RF(Clock, MuxAOut, RF_O1Sel, RF_O2Sel, RF_FunSel, RF_RSel, RF_TSel, RF_O1, RF_O2);
 
-    mux_2to1 MuxC(MuxCSel, RF_O1, OutALU, MuxCOut);
+    mux_2to1 MuxC(Clock, MuxCSel, RF_O1, ARF_OutA, MuxCOut);
 
-    mux_4to1 MuxB(MuxBSel, OutALU, MemOut, IR_Out[7:0], ARF_OutA, MuxBOut);
+    mux_4to1 MuxB(Clock, MuxBSel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxBOut);
 
+    part3_ALU ALU(Clock, MuxCOut, RF_O2, ALU_FunSel, ALU_Out, ALU_FlagOut);
+
+    part2c_ARF ARF(Clock, MuxBOut, ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel, ARF_OutA, ARF_OutB);
+
+    part2a_IRreg IR(Clock, MemOut, IR_Funsel, IR_LH, IR_Enable, IR_Out);
 
 
 endmodule
