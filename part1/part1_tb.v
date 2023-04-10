@@ -6,9 +6,16 @@ module part1_tb();
 reg [1:0] FunSel;
 reg [3:0] data_in;
 reg enable;
+reg clk;
 wire [3:0] data_out;
 
-part1 part1_inst (FunSel, data_in, enable, data_out);
+part1 #(4) part1_inst (clk, FunSel, data_in, enable, data_out);
+
+always begin
+
+    clk = 0;
+    forever #5 clk = ~clk;
+end
 
 initial begin
 

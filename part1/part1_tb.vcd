@@ -1,5 +1,5 @@
 $date
-	Mon Apr  3 18:11:48 2023
+	Tue Apr 11 00:14:36 2023
 $end
 $version
 	Icarus Verilog
@@ -10,57 +10,83 @@ $end
 $scope module part1_tb $end
 $var wire 4 ! data_out [3:0] $end
 $var reg 2 " FunSel [1:0] $end
-$var reg 4 # data_in [3:0] $end
-$var reg 1 $ enable $end
+$var reg 1 # clk $end
+$var reg 4 $ data_in [3:0] $end
+$var reg 1 % enable $end
 $scope module part1_inst $end
-$var wire 2 % FunSel [1:0] $end
-$var wire 4 & data_in [3:0] $end
-$var wire 1 $ enable $end
-$var reg 4 ' data_out [3:0] $end
+$var wire 2 & FunSel [1:0] $end
+$var wire 1 # clk $end
+$var wire 4 ' data_in [3:0] $end
+$var wire 1 % enable $end
+$var wire 4 ( zero [3:0] $end
+$var reg 4 ) data_out [3:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-bx '
-b10 &
-b0 %
-0$
-b10 #
+bx )
+b0 (
+b10 '
+b0 &
+0%
+b10 $
+0#
 b0 "
 bx !
 $end
+#5
+1#
 #10
+0#
+1%
+#15
 b0 !
-b0 '
-1$
+b0 )
+1#
 #20
-b10 !
-b10 '
+0#
 b1 "
-b1 %
+b1 &
+#25
+b10 !
+b10 )
+1#
 #30
-b1 !
-b1 '
+0#
 b10 "
-b10 %
-#40
-b10 !
-b10 '
-b110 #
-b110 &
-b11 "
-b11 %
-#50
-0$
-b1 "
-b1 %
-#60
-b0 !
-b0 '
-1$
-b10 #
 b10 &
+#35
+b1 !
+b1 )
+1#
+#40
+0#
+b110 $
+b110 '
+b11 "
+b11 &
+#45
+b10 !
+b10 )
+1#
+#50
+0#
+0%
+b1 "
+b1 &
+#55
+1#
+#60
+0#
+1%
+b10 $
+b10 '
 b0 "
-b0 %
+b0 &
+#65
+b0 !
+b0 )
+1#
 #70
+0#
