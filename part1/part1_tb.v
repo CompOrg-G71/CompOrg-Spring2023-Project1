@@ -3,13 +3,14 @@
 
 module part1_tb();
 
+parameter n = 8;
 reg [1:0] FunSel;
-reg [3:0] data_in;
+reg [n-1:0] data_in;
 reg enable;
 reg clk;
-wire [3:0] data_out;
+wire [n-1:0] data_out;
 
-part1 #(4) part1_inst (clk, FunSel, data_in, enable, data_out);
+part1 #(n) part1_inst (clk, FunSel, data_in, enable, data_out);
 
 always begin
 
