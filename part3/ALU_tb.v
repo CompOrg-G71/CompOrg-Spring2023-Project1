@@ -51,8 +51,10 @@ module ALU_tb;
         B_tb = 8'b00000000;
         FunSel_tb = 4'b0000;
         clk_tb = 1'b0;
-
         #10;
+        $display("FunSel 0000 OutALU: %b", OutALU_tb);
+        $display("Flags: %b", Flags_tb);
+
 
         // Test ADD operation
         A_tb = 8'b00110011;

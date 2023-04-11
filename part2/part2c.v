@@ -22,58 +22,58 @@ always @ (posedge clk) begin
     if(FunSel == 2'b00)
     begin
         if(RSel[3] == 1) 
-            PC <= 8'b00000000;
+            PC = 8'b00000000;
         if(RSel[2] == 1) 
-            AR <= 8'b00000000;
+            AR = 8'b00000000;
         if(RSel[1] == 1) 
-            SP <= 8'b00000000;
+            SP = 8'b00000000;
         if(RSel[0] == 1) 
-            PCPast <= 8'b00000000;
+            PCPast = 8'b00000000;
     end
     else if(FunSel == 2'b01)
     begin
         if(RSel[3] == 1) 
-            PC <= I;
+            PC = I;
         if(RSel[2] == 1) 
-            AR <= I;
+            AR = I;
         if(RSel[1] == 1) 
-            SP <= I;
+            SP = I;
         if(RSel[0] == 1)
-            PCPast <= I;
+            PCPast = I;
     end
     else if(FunSel == 2'b10)
     begin
         if(RSel[3] == 1) 
-            PC <= PC + 1;
+            PC = PC + 1;
         if(RSel[2] == 1) 
-            AR <= AR + 1;
+            AR = AR + 1;
         if(RSel[1] == 1) 
-            SP <= SP + 1;
+            SP = SP + 1;
         if(RSel[0] == 1)
-            PCPast <= PCPast + 1;
+            PCPast = PCPast + 1;
     end
     else if(FunSel == 2'b11)
     begin
         if(RSel[3] == 1) 
-            PC <= PC - 1;
+            PC = PC - 1;
         if(RSel[2] == 1) 
-            AR <= AR - 1;
+            AR = AR - 1;
         if(RSel[1] == 1) 
-            SP <= SP - 1;
+            SP = SP - 1;
         if(RSel[0] == 1)
-            PCPast <= PCPast - 1;
+            PCPast = PCPast - 1;
     end
 
 
-    if(OutASel == 2'b00) OutA <= AR;
-    else if(OutASel == 2'b01) OutA <= SP;
-    else if(OutASel == 2'b10) OutA <= PCPast;
-    else if(OutASel == 2'b11) OutA <= PC;
+    if(OutASel == 2'b00) OutA = AR;
+    else if(OutASel == 2'b01) OutA = SP;
+    else if(OutASel == 2'b10) OutA = PCPast;
+    else if(OutASel == 2'b11) OutA = PC;
 
-    if(OutBSel == 2'b00) OutB <= AR;
-    else if(OutBSel == 2'b01) OutB <= SP;
-    else if(OutBSel == 2'b10) OutB <= PCPast;
-    else if(OutBSel == 2'b11) OutB <= PC;
+    if(OutBSel == 2'b00) OutB = AR;
+    else if(OutBSel == 2'b01) OutB = SP;
+    else if(OutBSel == 2'b10) OutB = PCPast;
+    else if(OutBSel == 2'b11) OutB = PC;
 
 end
 
