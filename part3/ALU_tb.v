@@ -31,7 +31,7 @@ module ALU_tb;
     wire [7:0] OutALU_tb;
     wire [3:0] Flags_tb;
 
-    ALU ALU_inst (
+    part3_ALU ALU_inst (
         .A(A_tb),
         .B(B_tb),
         .FunSel(FunSel_tb),
@@ -143,8 +143,9 @@ module ALU_tb;
         $display("CSR operation result: %b", OutALU_tb);
         $display("CSR operation flags: %b", Flags_tb);
 
+        #50;
+
         // Finish simulation
         $finish;
-        #10;
 end
 endmodule
