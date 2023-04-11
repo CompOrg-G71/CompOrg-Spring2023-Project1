@@ -6,3 +6,14 @@
 \contentsline {subsection}{\numberline {1.2}Simulation}{4}{subsection.1.2}%
 \contentsline {section}{\numberline {2}Part 2}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Part 2a}{4}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Implementation}{4}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Simulation}{5}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}Part 2b}{5}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Implementation}{6}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Simulation}{8}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Part 2c}{9}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Implementation}{9}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Simulation}{11}{subsubsection.2.3.2}%
+\contentsline {section}{\numberline {3}Part 3}{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Implementation}{12}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Simulation}{14}{subsection.3.2}%
