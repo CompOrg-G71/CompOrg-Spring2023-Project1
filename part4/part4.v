@@ -320,7 +320,7 @@ module mux_2to1(
     output reg [7:0] out
 );
 
-    always @(posedge clk) begin
+    always @(*) begin
         case(sel)
             1'b0: out = in0;
             1'b1: out = in1;
@@ -339,7 +339,7 @@ module mux_4to1(
     output reg [7:0] out
 );
 
-    always @(posedge clk) begin
+    always @(*) begin
         case(sel)
             2'b00: out = in0;
             2'b01: out = in1;
@@ -363,7 +363,7 @@ input[1:0] ARF_FunSel,
 input[3:0] ARF_RSel,
 input      IR_LH,
 input      IR_Enable,
-input[1:0] IR_Funsel,
+input[1:0] IR_FunSel,
 input      Mem_WR,
 input      Mem_CS,
 input[1:0] MuxASel,
@@ -380,21 +380,21 @@ input      Clock
     wire [7:0] ARF_OutA, ARF_OutB;
     wire [15:0] IR_Out;
     
-    Memory Mem(Clock, ARF_OutB, ALU_Out, Mem_WR, Mem_CS, MemOut);
+    part2c_ARF ARF(Clock, MuxBOut, ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel, ARF_OutA, ARF_OutB);
 
     mux_4to1 MuxA(Clock, MuxASel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxAOut);
+
+    mux_4to1 MuxB(Clock, MuxBSel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxBOut);
 
     part2b_RF RF(Clock, MuxAOut, RF_O1Sel, RF_O2Sel, RF_FunSel, RF_RSel, RF_TSel, RF_O1, RF_O2);
 
     mux_2to1 MuxC(Clock, MuxCSel, RF_O1, ARF_OutA, MuxCOut);
 
-    mux_4to1 MuxB(Clock, MuxBSel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxBOut);
-
     part3_ALU ALU(Clock, MuxCOut, RF_O2, ALU_FunSel, ALU_Out, ALU_FlagOut);
 
-    part2c_ARF ARF(Clock, MuxBOut, ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel, ARF_OutA, ARF_OutB);
+    Memory Mem(Clock, ARF_OutB, ALU_Out, Mem_WR, Mem_CS, MemOut);
 
-    part2a_IRreg IR(Clock, MemOut, IR_Funsel, IR_LH, IR_Enable, IR_Out);
+    part2a_IRreg IR(Clock, MemOut, IR_FunSel, IR_LH, IR_Enable, IR_Out);
 
 
 endmodule

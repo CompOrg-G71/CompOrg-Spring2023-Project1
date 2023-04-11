@@ -33,7 +33,7 @@ module Project1Test();
     reg[3:0] ARF_RSel;
     reg      IR_LH;
     reg      IR_Enable;
-    reg[1:0]      IR_Funsel;
+    reg[1:0]      IR_FunSel;
     reg      Mem_WR;
     reg      Mem_CS;
     reg[1:0] MuxASel;
@@ -55,7 +55,7 @@ module Project1Test();
     .ARF_RSel(ARF_RSel),
     .IR_LH(IR_LH),
     .IR_Enable(IR_Enable),
-    .IR_Funsel(IR_Funsel),
+    .IR_FunSel(IR_FunSel),
     .Mem_WR(Mem_WR),
     .Mem_CS(Mem_CS),
     .MuxASel(MuxASel),
@@ -88,7 +88,7 @@ module Project1Test();
     begin
         {Operation, RF_O1Sel, RF_O2Sel, RF_FunSel, 
         RF_RSel, RF_TSel, ALU_FunSel, ARF_OutASel, ARF_OutBSel, 
-        ARF_FunSel, ARF_RSel, IR_LH, IR_Enable, IR_Funsel, 
+        ARF_FunSel, ARF_RSel, IR_LH, IR_Enable, IR_FunSel, 
         Mem_WR, Mem_CS, MuxASel, MuxBSel, MuxCSel} = TestVectors[VectorNum];
     end
     
@@ -101,7 +101,7 @@ module Project1Test();
             $display("Register File: O1Sel: %d, O2Sel: %d, FunSel: %d, RSel: %d, TSel: %d", RF_O1Sel, RF_O2Sel, RF_FunSel, RF_RSel, RF_TSel);            
             $display("ALU FunSel: %d", ALU_FunSel);
             $display("Addres Register File: OutASel: %d, OutBSel: %d, FunSel: %d, Regsel: %d", ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel);            
-            $display("Instruction Register: LH: %d, Enable: %d, FunSel: %d", IR_LH, IR_Enable, IR_Funsel);            
+            $display("Instruction Register: LH: %d, Enable: %d, FunSel: %d", IR_LH, IR_Enable, IR_FunSel);            
             $display("Memory: WR: %d, CS: %d", Mem_WR, Mem_CS);
             $display("MuxASel: %d, MuxBSel: %d, MuxCSel: %d", MuxASel, MuxBSel, MuxCSel);
             
