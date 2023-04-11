@@ -65,14 +65,16 @@ module Project1Test();
     );
     
     //Test Vector Variables
-    reg [31:0] VectorNum, Errors, TotalLine; 
-    reg [39:0] TestVectors[10000:0];
+    reg [41:0] VectorNum, Errors, TotalLine; 
+    reg [41:0] TestVectors[3:0];
     reg Reset, Operation;
-    
+    initial begin
+        Reset = 0;
+    end
     //Clock Signal Generation
     always 
     begin
-        #5 Clock = 1; #5 Clock = 0; // 10ns period
+        Clock = 1; #5; Clock = 0; #5; // 10ns period
     end
     
     //Read Test Bench Values
@@ -99,7 +101,7 @@ module Project1Test();
             $display("Operation: %d", Operation);
             $display("Register File: O1Sel: %d, O2Sel: %d, FunSel: %d, RSel: %d, TSel: %d", RF_O1Sel, RF_O2Sel, RF_FunSel, RF_RSel, RF_TSel);            
             $display("ALU FunSel: %d", ALU_FunSel);
-            $display("Addres Register File: OutCSel: %d, OutDSel: %d, FunSel: %d, Regsel: %d", ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel);            
+            $display("Addres Register File: OutASel: %d, OutBSel: %d, FunSel: %d, Regsel: %d", ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel);            
             $display("Instruction Register: LH: %d, Enable: %d, FunSel: %d", IR_LH, IR_Enable, IR_Funsel);            
             $display("Memory: WR: %d, CS: %d", Mem_WR, Mem_CS);
             $display("MuxASel: %d, MuxBSel: %d, MuxCSel: %d", MuxASel, MuxBSel, MuxCSel);
@@ -108,16 +110,16 @@ module Project1Test();
             $display("Output Values:");
             $display("Register File: AOut: %d, BOut: %d", _ALUSystem.RF_O1, _ALUSystem.RF_O2);            
             $display("ALUOut: %d, ALUOutFlag: %d, ALUOutFlags: Z:%d, C:%d, N:%d, O:%d,", _ALUSystem.ALU_Out, _ALUSystem.ALU_FlagOut, _ALUSystem.ALU_FlagOut[3],_ALUSystem.ALU_FlagOut[2],_ALUSystem.ALU_FlagOut[1],_ALUSystem.ALU_FlagOut[0]);
-            $display("Address Register File: OutA: %d, OutB (Address): %d", _ALUSystem.ARF_OutA, _ALUSystem.ARF_OutB);            
+            $display("Address Register File: AOut: %d, BOut (Address): %d", _ALUSystem.ARF_OutA, _ALUSystem.ARF_OutB);            
             $display("Memory Out: %d", _ALUSystem.MemOut);            
-            $display("Instruction Register: IROut: %d", _ALUSystem.IR_Out);
+            $display("Instruction Register: IROut: %d", _ALUSystem.IR_Out);            
             $display("MuxAOut: %d, MuxBOut: %d, MuxCOut: %d", _ALUSystem.MuxAOut, _ALUSystem.MuxBOut, _ALUSystem.MuxCOut);
-            
-            $display("\n--------------------------\n");
 
+            $display("\n--------------------------------------------\n");
+            
             // increment array index and read next testvector
             VectorNum = VectorNum + 1;
-            if (TestVectors[VectorNum] === 40'bx)
+            if (TestVectors[VectorNum] === 42'bx)
             begin
                 $display("%d tests completed.",
                 VectorNum);

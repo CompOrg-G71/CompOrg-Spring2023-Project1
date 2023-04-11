@@ -6,7 +6,7 @@ module part2c_tb();
 reg clk;
 reg [7:0] I;
 reg [1:0] OutASel, OutBSel, FunSel;
-reg [2:0] RSel;
+reg [3:0] RSel;
 
 wire [7:0] OutA, OutB;
 
@@ -30,28 +30,48 @@ initial begin
     $dumpfile("part2c_tb.vcd");
     $dumpvars(0, part2c_tb);
 
-    #50
-
-    I = 8'b00000100;
-    OutASel = 2'b00;
-    OutBSel = 2'b11;
-    FunSel = 2'b01;
-    RSel = 3'b011;
-    #50
-
-    I = 8'b00000110;
-    OutASel = 2'b10;
-    OutBSel = 2'b11;
-    FunSel = 2'b01;
-    RSel = 3'b011;
-    #50
-
-    I = 8'b00000000;
-    OutASel = 2'b10;
-    OutBSel = 2'b11;
+    I = 8'b00001000;
     FunSel = 2'b00;
-    RSel = 3'b011;
-    #50
+    RSel = 4'b1111;
+    OutASel = 2'b00;
+    OutBSel = 2'b00;
+    #15;
+
+    I = 8'b00001000;
+    FunSel = 2'b01;
+    RSel = 4'b1001;
+    OutASel = 2'b10;
+    OutBSel = 2'b11;
+    #15;
+
+    I = 8'b00011000;
+    FunSel = 2'b10;
+    RSel = 4'b1001;
+    OutASel = 2'b10;
+    OutBSel = 2'b11;
+    #15;
+
+    I = 8'b00011000;
+    FunSel = 2'b11;
+    RSel = 4'b1001;
+    OutASel = 2'b10;
+    OutBSel = 2'b11;
+    #15;
+
+    I = 8'b00011000;
+    FunSel = 2'b01;
+    RSel = 4'b0110;
+    OutASel = 2'b00;
+    OutBSel = 2'b01;
+    #15;
+
+    I = 8'b00011000;
+    FunSel = 2'b00;
+    RSel = 4'b0110;
+    OutASel = 2'b00;
+    OutBSel = 2'b01;
+    #15;
+
 
     $display("Simulation Complete..");
     $finish;

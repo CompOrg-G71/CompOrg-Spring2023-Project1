@@ -3,7 +3,7 @@
 
 module part1_tb();
 
-parameter n = 8;
+parameter n = 4;
 reg [1:0] FunSel;
 reg [n-1:0] data_in;
 reg enable;

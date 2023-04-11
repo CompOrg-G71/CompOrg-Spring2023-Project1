@@ -27,8 +27,9 @@ part2b uut(
 );
 
 initial begin
-    clk = 0;
+    clk = 1;
     forever #5 clk = ~clk;
+end
 
 initial begin
     
@@ -41,7 +42,7 @@ initial begin
     FunSel = 2'b00;
     RSel = 4'b0100;
     TSel = 4'b0001;
-    #10;
+    #15;
 
     I = 8'b00011000;
     O1Sel = 3'b101;
@@ -49,7 +50,7 @@ initial begin
     FunSel = 2'b01;
     RSel = 4'b0100;
     TSel = 4'b0001;
-    #10;
+    #15;
 
     I = 8'b00011000;
     O1Sel = 3'b101;
@@ -57,7 +58,7 @@ initial begin
     FunSel = 2'b10;
     RSel = 4'b0100;
     TSel = 4'b0001;
-    #10;
+    #15;
     
     I = 8'b00011000;
     O1Sel = 3'b101;
@@ -65,7 +66,7 @@ initial begin
     FunSel = 2'b11;
     RSel = 4'b0100;
     TSel = 4'b0001;
-    #10;
+    #15;
 
     I = 8'b01011110;
     O1Sel = 3'b110;
@@ -73,7 +74,9 @@ initial begin
     FunSel = 2'b01;
     RSel = 4'b0010;
     TSel = 4'b0010;
-    #10;    
+    #15;
+
+    #30;
 
     $display("Simulation Completed..");
     $finish;

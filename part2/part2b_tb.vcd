@@ -1,5 +1,5 @@
 $date
-	Wed Apr  5 17:26:12 2023
+	Tue Apr 11 17:33:49 2023
 $end
 $version
 	Icarus Verilog
@@ -16,44 +16,47 @@ $var reg 3 % O1Sel [2:0] $end
 $var reg 3 & O2Sel [2:0] $end
 $var reg 4 ' RSel [3:0] $end
 $var reg 4 ( TSel [3:0] $end
+$var reg 1 ) clk $end
 $scope module uut $end
-$var wire 2 ) FunSel [1:0] $end
-$var wire 8 * I [7:0] $end
-$var wire 3 + O1Sel [2:0] $end
-$var wire 3 , O2Sel [2:0] $end
-$var wire 4 - RSel [3:0] $end
-$var wire 4 . TSel [3:0] $end
-$var reg 8 / O1 [7:0] $end
-$var reg 8 0 O2 [7:0] $end
-$var reg 8 1 R1 [7:0] $end
-$var reg 8 2 R2 [7:0] $end
-$var reg 8 3 R3 [7:0] $end
-$var reg 8 4 R4 [7:0] $end
-$var reg 8 5 T1 [7:0] $end
-$var reg 8 6 T2 [7:0] $end
-$var reg 8 7 T3 [7:0] $end
-$var reg 8 8 T4 [7:0] $end
+$var wire 2 * FunSel [1:0] $end
+$var wire 8 + I [7:0] $end
+$var wire 3 , O1Sel [2:0] $end
+$var wire 3 - O2Sel [2:0] $end
+$var wire 4 . RSel [3:0] $end
+$var wire 4 / TSel [3:0] $end
+$var wire 1 ) clk $end
+$var reg 8 0 O1 [7:0] $end
+$var reg 8 1 O2 [7:0] $end
+$var reg 8 2 R1 [7:0] $end
+$var reg 8 3 R2 [7:0] $end
+$var reg 8 4 R3 [7:0] $end
+$var reg 8 5 R4 [7:0] $end
+$var reg 8 6 T1 [7:0] $end
+$var reg 8 7 T2 [7:0] $end
+$var reg 8 8 T3 [7:0] $end
+$var reg 8 9 T4 [7:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b0 8
+bx 9
+bx 8
 bx 7
 bx 6
 bx 5
 bx 4
 bx 3
-b0 2
+bx 2
 bx 1
 bx 0
-bx /
-b1 .
-b100 -
+b1 /
+b100 .
+b0 -
 b0 ,
 b0 +
 b0 *
-b0 )
+0)
 b1 (
 b100 '
 b0 &
@@ -63,52 +66,81 @@ b0 #
 bx "
 bx !
 $end
+#5
+b0 9
+b0 3
+1)
 #10
-b11000 !
-b11000 0
-b11000 "
-b11000 /
-b11000 8
-b11000 2
+0)
 b1 #
-b1 )
+b1 *
 b11 &
-b11 ,
+b11 -
 b101 %
-b101 +
+b101 ,
 b11000 $
-b11000 *
-#20
-b10111 !
-b10111 0
-b10111 "
-b10111 /
-b10111 8
-b10111 2
-b10 #
-b10 )
-#30
+b11000 +
+#15
 b11000 !
-b11000 0
+b11000 1
 b11000 "
-b11000 /
-b11000 8
-b11000 2
+b11000 0
+b11000 9
+b11000 3
+1)
+#20
+0)
+b10 #
+b10 *
+#25
+b10111 !
+b10111 1
+b10111 9
+b10111 "
+b10111 0
+b10111 3
+1)
+#30
+0)
 b11 #
-b11 )
+b11 *
+#35
+b11000 !
+b11000 1
+b11000 9
+b11000 "
+b11000 0
+b11000 3
+1)
 #40
-b1011110 "
-b1011110 /
-b1011110 7
-b1011110 3
+0)
 b10 (
-b10 .
+b10 /
 b10 '
-b10 -
+b10 .
 b1 #
-b1 )
+b1 *
 b110 %
-b110 +
+b110 ,
 b1011110 $
-b1011110 *
+b1011110 +
+#45
+b1011110 "
+b1011110 0
+b1011110 8
+b1011110 4
+1)
 #50
+0)
+#55
+1)
+#60
+0)
+#65
+1)
+#70
+0)
+#75
+1)
+#80
+0)

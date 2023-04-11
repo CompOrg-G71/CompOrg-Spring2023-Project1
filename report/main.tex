@@ -13,6 +13,7 @@
 \usepackage[cmex10]{amsmath}
 \usepackage{stfloats}
 \usepackage{multirow}
+\setcounter{section}{-1}
 \usepackage[%
     pdfborder={0 0 0}
 ]{hyperref}
@@ -83,7 +84,7 @@
 \subsection{Project Parts}
 \begin{itemize}
 \item Part 1: n-bit register
-\item Part 2: \begin{itemize}
+\item Part 2: Register Files \begin{itemize}
 \item Part 2a: 16-bit IR Register
 \item Part 2b: Register File (RF)
 \item Part 2c: Address Register File (ARF)
@@ -140,7 +141,7 @@ endmodule
 \end{lstlisting}
 
 \subsection{Simulation}
-\hyperref[fig:part1_sim.png]{Figure \ref{fig:part1_sim}} Shows a simulation of the module implemented earlier of n = 4.
+\hyperref[fig:part1_sim]{Figure \ref{fig:part1_sim}} Shows a simulation of the module implemented earlier of n = 4.
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{part1_sim.png}
