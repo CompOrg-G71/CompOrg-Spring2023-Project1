@@ -66,7 +66,7 @@ module Project1Test();
     
     //Test Vector Variables
     reg [41:0] VectorNum, Errors, TotalLine; 
-    reg [41:0] TestVectors[99:0];
+    reg [41:0] TestVectors[999:0];
     reg Reset, Operation;
     initial begin
         Reset = 0;
@@ -86,7 +86,6 @@ module Project1Test();
     // Apply test vectors on rising edge of clock
     always @(posedge Clock)
     begin
-        #1; 
         {Operation, RF_O1Sel, RF_O2Sel, RF_FunSel, 
         RF_RSel, RF_TSel, ALU_FunSel, ARF_OutASel, ARF_OutBSel, 
         ARF_FunSel, ARF_RSel, IR_LH, IR_Enable, IR_Funsel, 
