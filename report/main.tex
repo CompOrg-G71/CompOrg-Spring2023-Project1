@@ -448,7 +448,7 @@ module part3_ALU (input clk, input [7:0] A, input [7:0] B, input [3:0] FunSel, o
             else Flags[0] = 0;
         end
         else if(FunSel == 4'b0101)begin
-            {cout, OutALU} = {1'b0, A} + {1'b0, B_neg}; // TODO: check if this is correct
+            {cout, OutALU} = {1'b0, A} + {1'b0, B_neg};
             if(cout !== OutALU[7]) Flags[0] = 1; //Overflow
             else Flags[0] = 0;
         end
@@ -504,6 +504,59 @@ endmodule
 \includegraphics[width=1\textwidth]{part3_sim.png}
 \caption{Simulation of Part 3, ALU Module.}
 \label{fig:part3_sim}
+\end{figure}
+\pagebreak
+\section{Part 4}
+Combining all the module to implement a complete ALU System. \hyperref[fig:part4_diagram]{Figure \ref{fig:part4_diagram}} Shows the diagram of the system implement in this part.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{part4_diagram.png}
+\caption{Diagram of the ALU System}
+\label{fig:part4_diagram} 
+\end{figure}
+
+\subsection{Implementation}
+We can implement the system by combining all the module implement by implementing all the previous module in the module as shown:
+
+\begin{lstlisting}
+module ALUSystem( input[2:0] RF_O1Sel, input[2:0] RF_O2Sel, input[1:0] RF_FunSel, input[3:0] RF_RSel, input[3:0] RF_TSel, input[3:0] ALU_FunSel, input[1:0] ARF_OutASel, input[1:0] ARF_OutBSel, input[1:0] ARF_FunSel, input[3:0] ARF_RSel, input IR_LH, input IR_Enable, input[1:0] IR_FunSel, input Mem_WR, input      Mem_CS, input[1:0] MuxASel, input[1:0] MuxBSel, input MuxCSel, input Clock );
+
+    wire [7:0] MemOut;
+    wire [7:0] RF_O1,RF_O2;
+    wire [7:0] MuxAOut, MuxBOut, MuxCOut;
+    wire [3:0] ALU_FlagOut;
+    wire [7:0] ALU_Out;
+    wire [7:0] ARF_OutA, ARF_OutB;
+    wire [15:0] IR_Out;
+    
+    part2c_ARF ARF(Clock, MuxBOut, ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel, ARF_OutA, ARF_OutB);
+
+    mux_4to1 MuxA(Clock, MuxASel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxAOut);
+
+    mux_4to1 MuxB(Clock, MuxBSel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxBOut);
+
+    part2b_RF RF(Clock, MuxAOut, RF_O1Sel, RF_O2Sel, RF_FunSel, RF_RSel, RF_TSel, RF_O1, RF_O2);
+
+    mux_2to1 MuxC(Clock, MuxCSel, RF_O1, ARF_OutA, MuxCOut);
+
+    part3_ALU ALU(Clock, MuxCOut, RF_O2, ALU_FunSel, ALU_Out, ALU_FlagOut);
+
+    Memory Mem(Clock, ARF_OutB, ALU_Out, Mem_WR, Mem_CS, MemOut);
+
+    part2a_IRreg IR(Clock, MemOut, IR_FunSel, IR_LH, IR_Enable, IR_Out);
+
+endmodule
+\end{lstlisting}
+
+\subsection{Simulation}
+By using the TestBench supplied with the Project, we get the following results shown in \hyperref[fig:part4_sim]{Figure \ref{fig:part4_sim}}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{part4_sim.png}
+\caption{Simulation of Part 4}
+\label{fig:part4_sim}
 \end{figure}
 
 \end{document}

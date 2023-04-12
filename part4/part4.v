@@ -17,7 +17,22 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
+module part1 #(parameter n = 4) (input clk, input [1:0] FunSel, input [n-1:0] data_in, input enable, output reg [n-1:0] data_out);
 
+    wire [n-1:0] zero = 0;
+    always @(posedge clk)
+    begin
+        if (enable == 0)
+            data_out = data_out;
+        else
+            case (FunSel)
+                2'b00: data_out = zero;
+                2'b01: data_out = data_in;
+                2'b10: data_out = data_out - 1;
+                2'b11: data_out = data_out + 1;
+            endcase
+    end
+endmodule
 
 module part2a_IRreg(input clk, input[7:0] I, input [1:0] FunSel, input LH, input enable, output reg [15:0] data_out);
 
@@ -285,11 +300,11 @@ module part3_ALU (input clk, input [7:0] A, input [7:0] B, input [3:0] FunSel, o
 endmodule
 
 module Memory(
-    input wire clock,
-    input wire[7:0] address,
-    input wire[7:0] data,
-    input wire wr, //Read = 0, Write = 1
-    input wire cs, //Chip is enable when cs = 0
+    input  clock,
+    input [7:0] address,
+    input [7:0] data,
+    input  wr, //Read = 0, Write = 1
+    input  cs, //Chip is enable when cs = 0
     output reg[7:0] o // Output
 );
     //Declaration of the RAM Area
@@ -317,11 +332,9 @@ module mux_2to1(
     output reg [7:0] out
 );
 
-    always @(*) begin
-        case(sel)
-            1'b0: out = in0;
-            1'b1: out = in1;
-        endcase
+    always @(posedge clk) begin
+        if(1'b0) out = in0;
+        if(1'b1) out = in1;
     end
 
 endmodule
@@ -336,13 +349,11 @@ module mux_4to1(
     output reg [7:0] out
 );
 
-    always @(*) begin
-        case(sel)
-            2'b00: out = in0;
-            2'b01: out = in1;
-            2'b10: out = in2;
-            2'b11: out = in3;
-        endcase
+    always @(posedge clk) begin
+        if(sel == 2'b00) out = in0;
+        if(sel == 2'b01) out = in1;
+        if(sel == 2'b10) out = in2;
+        if(sel == 2'b11) out = in3;
     end
 
 endmodule
