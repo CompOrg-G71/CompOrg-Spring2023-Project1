@@ -387,12 +387,9 @@ input      Clock
     wire [7:0] ALU_Out;
     wire [7:0] ARF_OutA, ARF_OutB;
     wire [15:0] IR_Out;
+    wire [7:0] temp;
     
     part2c_ARF ARF(Clock, MuxBOut, ARF_OutASel, ARF_OutBSel, ARF_FunSel, ARF_RSel, ARF_OutA, ARF_OutB);
-
-    mux_4to1 MuxA(Clock, MuxASel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxAOut);
-
-    mux_4to1 MuxB(Clock, MuxBSel, ALU_Out, MemOut, IR_Out[7:0], ARF_OutA, MuxBOut);
 
     part2b_RF RF(Clock, MuxAOut, RF_O1Sel, RF_O2Sel, RF_FunSel, RF_RSel, RF_TSel, RF_O1, RF_O2);
 
@@ -403,6 +400,13 @@ input      Clock
     Memory Mem(Clock, ARF_OutB, ALU_Out, Mem_WR, Mem_CS, MemOut);
 
     part2a_IRreg IR(Clock, MemOut, IR_FunSel, IR_LH, IR_Enable, IR_Out);
+
+    assign temp = IR_Out[7:0];
+
+    mux_4to1 MuxA(Clock, MuxASel, ALU_Out, MemOut, temp, ARF_OutA, MuxAOut);
+
+    mux_4to1 MuxB(Clock, MuxBSel, ALU_Out, MemOut, temp, ARF_OutA, MuxBOut);
+
 
 
 endmodule
