@@ -66,7 +66,7 @@ module Project1Test();
     
     //Test Vector Variables
     reg [41:0] VectorNum, Errors, TotalLine; 
-    reg [41:0] TestVectors[999:0];
+    reg [41:0] TestVectors[0:999];
     reg Reset, Operation;
     initial begin
         Reset = 0;
